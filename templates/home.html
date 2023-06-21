@@ -2,8 +2,35 @@
 <html>
   <head>
     {% include 'bootstrap.html' %}
+    <style>
+      #rcorners1 {
+        border-radius: 25px;
+        background: white;
+        padding: 10px;
+        width: 350px;
+        height: 700px;
+      }
+    </style>
   </head>
   <body>
     {% include 'navbar.html' %}
+    {% include 'background.html' %}
+    
+    <div class="container">
+      <div class="row" style="margin-bottom:16px; ">
+        <div class=col-md-3>
+          <div class="lead m-3 p-3" id="rcorners1" >
+            <h3 class="text-center">Explore Endless Recipes </h3><hr>
+            <p style="font-family:Georgia ">
+            At Tasty Table, our mission is to inspire and empower individuals to explore the joy of cooking and create delicious, memorable meals. We believe that cooking should be accessible to everyone, regardless of their culinary expertise.
+  <br/><br/>
+Through our platform, we aim to provide a vast collection of diverse and curated recipes, ranging from traditional favorites to innovative creations. We strive to foster a vibrant community where food enthusiasts can connect, share their culinary experiences, and support each other on their cooking journeys.
+            </p><hr>
+    <p style="font-size:17px">- Steven Franchetto, Owner</p>
+    </div>
+    </div>
+    <div class="d-none d-md-block col-md-6">
+      <img src="/static/logo.webp" style="height:320px; border-radius: 4px;"/>
+    </div>
   </body>
 </html>
