@@ -13,12 +13,18 @@
     </style>
   </head>
   <body>
-    {% include 'navbar.html' %}
+    
+    {% if 'username' in session %}
+      {% include 'navbars/navbar_logged_in.html' %}
+    {% else %}
+      {% include 'navbars/navbar.html' %}
+    {% endif %}
     {% include 'background.html' %}
     
+    <h1> {{session['username']}} </h1>
     <div class="container">
       <div class="row" style="margin-bottom:16px; ">
-          <div class="col-6 mt-5 mb-4" id="rcorners1">
+          <div class="col-6 mt-5 mb-4" id="rcorners1" style="border-style:solid; border-color:green">
             <h3 class="text-center">Explore Endless Recipes </h3><hr>
             <p class="lead"  style="font-family:Georgia ">
             At Tasty Table, our mission is to inspire and empower individuals to explore the joy of cooking and create delicious, memorable meals. We believe that cooking should be accessible to everyone, regardless of their culinary expertise.
