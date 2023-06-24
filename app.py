@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, redirect, session, jsonify, flash
-from database import register_user_to_db, login_user
+from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for
+from database import register_user_to_db, login_user, load_users_from_db, load_user_from_db
 import os
 
 app=Flask(__name__)
@@ -9,7 +9,8 @@ app.secret_key = os.environ['SECRET_KEY']
 
 @app.route("/")
 def home():
-  return render_template('home.html')
+  users = load_users_from_db()
+  return render_template('home.html', users=users)
 
 
 ##############################################################
@@ -21,11 +22,11 @@ def login():
   if request.method == 'POST':
         try:
           data = request.form
-          user = login_user(data)[0]['username']
-          if user:
+          username = login_user(data)[0]['username']
+          if username:
               session['logged_in'] = True
-              session['username'] = user
-              return render_template('dashboard.html')
+              session['username'] = username
+              return redirect(url_for('user_profile', username=username))
         except TypeError:
           flash('Invalid email or password')
 
@@ -55,11 +56,17 @@ def dashboard():
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect('/login')
+    flash('You have successfully signed out')
+    return redirect('/')
 
 ######################   END    ##############################
 ############### LOGIN / REGISTRATION / SESSION ###############
 ##############################################################
+
+@app.route('/profile/<username>')
+def user_profile(username):
+    user = load_user_from_db(username)
+    return render_template('user_profile.html', user=user)
 
 
 if __name__ == "__main__":

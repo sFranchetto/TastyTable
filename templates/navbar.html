@@ -1,0 +1,5 @@
+{% if 'username' in session %}
+      {% include 'navbars/navbar_logged_in.html' %}
+    {% else %}
+      {% include 'navbars/navbar_logged_out.html' %}
+{% endif %}

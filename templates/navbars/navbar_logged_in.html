@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse ms-3" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active " aria-current="page" href="#">Home</a>
+          <a class="nav-link active " aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Features</a>
@@ -26,7 +26,7 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
       <li style="margin-left:675px;">
-          <a href="/dashboard">
+          <a href="/profile/{{session['username']}}">
             <img src="/static/profile_icon.webp" width="40" height="40"/>
           </a>
       </li>

@@ -14,14 +14,19 @@
   </head>
   <body>
     
-    {% if 'username' in session %}
-      {% include 'navbars/navbar_logged_in.html' %}
-    {% else %}
-      {% include 'navbars/navbar.html' %}
-    {% endif %}
+    {% include 'navbar.html' %}
     {% include 'background.html' %}
     
     <h1> {{session['username']}} </h1>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+      <b><h3 class="text-center mt-4 mb-4"">{{ message }}</h3></b>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
     <div class="container">
       <div class="row" style="margin-bottom:16px; ">
           <div class="col-6 mt-5 mb-4" id="rcorners1" style="border-style:solid; border-color:green">
@@ -37,14 +42,19 @@ Through our platform, we aim to provide a vast collection of diverse and curated
             <img src="/static/third.avif" style="height:500px; border-radius: 15px;"/>
             <div class="row justify-content-center">
             <div class="col-4 mt-3" style="margin-left:180px;">
-            <button type="button" class="btn btn-outline-secondary"
+            <a href="/register">
+              <button type="button" class="btn btn-outline-secondary"
         style="--bs-btn-padding-y: .025rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: 1.5rem;">
               Get Started 🡕
             </button>
+            </a>
             </div>
             </div>
         </div>
       </div>
+      {% for user in users%}
+        <a href="/profile/{{user['username']}}"> hi hehehehe</a>
+      {% endfor%}
       </div>
   </body>
 </html>

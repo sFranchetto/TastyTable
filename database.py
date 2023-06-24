@@ -30,3 +30,29 @@ def login_user(data):
       return None
     else:
       return user
+
+def load_users_from_db():
+  with engine.connect() as conn:
+    result = conn.execute(
+      text("select * from users"))
+    user = []
+    for row in result.all():
+      user.append(row._asdict())
+    if len(user) == 0:
+      return None
+    else:
+      return user
+
+
+def load_user_from_db(username):
+    with engine.connect() as conn:
+      result = conn.execute(
+        text("select * from users WHERE username = :username")
+        .params(username=username))
+      user = []
+      for row in result.all():
+        user.append(row._asdict())
+      if len(user) == 0:
+        return None
+      else:
+        return user
