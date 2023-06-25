@@ -56,3 +56,19 @@ def load_user_from_db(username):
         return None
       else:
         return user
+
+
+def save_picture_to_database(picture):
+  picture_data = picture.read()
+  with engine.connect() as conn:
+    conn.execute(text("UPDATE users SET profile_picture = :profile_picture WHERE username = 'Henry'").
+                 params(
+                   profile_picture = picture_data))
+
+
+def show_picture_from_db(data):
+  with engine.connect() as conn:
+    result = conn.execute(text("SELECT profile_picture FROM users WHERE username = 'Supra Steve'"))
+    row = result.fetchone()
+    image_data = row
+    return image_data

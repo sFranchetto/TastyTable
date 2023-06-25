@@ -6,3 +6,4 @@ flask_bcrypt
 email_validator
 sqlalchemy
 pymysql
+werkzeug
