@@ -96,6 +96,12 @@
 .container .info span .fa {
   color: #EF3B3A;
 }
+.success {
+        color: green;
+      }
+      .error {
+        color: red;
+      }      
 body {
   background: #76b852; /* fallback for old browsers */
   background: rgb(141,194,111);
@@ -126,7 +132,7 @@ body {
     {% if messages %}
     <ul class="flashes">
       {% for message in messages %}
-      <li class="red-li">{{ message }}</li>
+        <li class="{{ message[1] }}">{{ message }}</li>
       {% endfor %}
     </ul>
     {% endif %}

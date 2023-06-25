@@ -58,17 +58,33 @@ def load_user_from_db(username):
         return user
 
 
-def save_picture_to_database(picture):
+def save_picture_to_database(picture, username):
   picture_data = picture.read()
   with engine.connect() as conn:
-    conn.execute(text("UPDATE users SET profile_picture = :profile_picture WHERE username = 'Henry'").
+    conn.execute(text("UPDATE users SET profile_picture = :profile_picture WHERE username = :username").
                  params(
-                   profile_picture = picture_data))
+                   profile_picture = picture_data,
+                    username = username))
 
 
-def show_picture_from_db(data):
+def save_default_picture_to_database(picture, data):
+  picture_data = picture.read()
   with engine.connect() as conn:
-    result = conn.execute(text("SELECT profile_picture FROM users WHERE username = 'Supra Steve'"))
+    conn.execute(text("UPDATE users SET profile_picture = :profile_picture WHERE username = :username").
+                 params(
+                   profile_picture = picture_data,
+                    username = data['username']))
+
+
+def show_picture_from_db(username):
+  with engine.connect() as conn:
+    result = conn.execute(text("SELECT profile_picture FROM users WHERE username = :username")
+                         .params(
+                           username = username
+                         ))
     row = result.fetchone()
     image_data = row
-    return image_data
+    if image_data:
+      return image_data
+    else:
+      return None

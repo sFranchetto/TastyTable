@@ -21,7 +21,7 @@
                 alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                 style="width: 150px; z-index: 1"> -->
               {% if session['username'] == user[0]['username']%}
-                <button onclick="window.location.href='/profile/{{session['username']}}/edit_profile'"
+                <button onclick="window.location.href='/profile/{{user[0]['username']}}/edit_profile'"
                   type="button" class="btn btn-outline-dark mt-4" data-mdb-ripple-color="dark"
                   style="z-index: 1;">
                   Edit profile
