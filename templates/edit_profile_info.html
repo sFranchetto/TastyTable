@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include 'bootstrap.html' %}
+  <style>
+    
+.avatar{
+width:200px;
+height:200px;
+}				
+  </style>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    {% include 'background.html' %}
+<div class="container bootstrap snippets bootdey">
+    <h1 class="text-secondary">Edit Profile</h1>
+      <hr>
+	<div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="data:;base64,{{ image_data }}" class="avatar img-circle img-thumbnail" alt="avatar">
+          <h6>This is your current photo...</h6>
+          
+          <a href="https://tastytable.sfranchetto.repl.co/profile/{{session['username']}}/edit_profile"> Click here to change it</a>
+        </div>
+      </div>
+      
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <!--
+        <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a> 
+          <i class="fa fa-coffee"></i>
+           This is an <strong>.alert</strong>. Use this to show important messages to the 
+        </div> -->
+        <h3>Personal info</h3>
+        
+        <form class="form-horizontal" method="POST" action="/profile/{{session['username']}}/edit_profile_info_sent">
+          <div class="form-group">
+            <label class="col-lg-3 control-label">First name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="{{user[0]['Firstname']}}" name="firstname">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Last name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="{{user[0]['Lastname']}}" name="lastname">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Country:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="{{user[0]['country']}}" name="country">
+            </div>
+          </div>
+          <div class="form-group col-lg-4">
+            <label class="col-lg-5 control-label">Cooking level:</label>
+            <select name="level" class="form-select">
+              <option selected disabled>Select</option>
+              <option value="Home cook" {% if user[0]['cheftype'] == 'Home cook'%} selected{% endif %}>Home cook</option>
+              <option value="Beginner" {% if user[0]['cheftype'] == 'Beginner'%} selected{% endif %}>Beginner</option>
+              <option value="Intermediate" {% if user[0]['cheftype'] == 'Intermediate'%} selected{% endif %}>Intermediate</option>
+              <option value="Master" {% if user[0]['cheftype'] == 'Master'%} selected{% endif %}>Master</option>
+              <option value="Professional" {% if user[0]['cheftype'] == 'Professional'%} selected{% endif %}>Professional</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">About:</label>
+              <div class="form-floating mb-3">
+                <textarea rows="4" cols="50" value="{{user[0]['about']}}" name="about">
+Enter about here...</textarea>
+              </div>
+          </div>
+          <input type="submit"></input>
+        </form>
+        <br/>
+        <a href="/profile/{{session['username']}}">Cancel </a>
+      </div>
+  </div>
+</div>
+<hr>
+</body>
+</html>

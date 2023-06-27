@@ -88,3 +88,15 @@ def show_picture_from_db(username):
       return image_data
     else:
       return None
+
+
+def edit_user_info(data, username):
+  with engine.connect() as conn:
+    conn.execute(text("UPDATE users SET Firstname = :firstname, Lastname = :lastname,  country = :country, about = :about, cheftype = :level WHERE username =:username").
+                 params(
+                   firstname = data['firstname'], 
+                   lastname = data['lastname'],     
+                   country = data['country'],
+                   about = data['about'],
+                   level = data['level'],
+                   username = username))

@@ -2,7 +2,6 @@
 <html>
   <head>
     {% include 'bootstrap.html' %}
-
   </head>
   <body>
     {% include 'navbar.html' %}
@@ -23,7 +22,9 @@
           <form method="POST" action="/profile/{{user[0]['username']}}/edit_profile_picture" enctype="multipart/form-data">
               <input type="file" name="picture" accept="image/*">
               <input type="submit" value="Upload">
+              
           </form>
+            <a href="/profile/{{session['username']}}"> Cancel </a>
           </div>        
   </body>
 </html>

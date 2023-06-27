@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for, send_file
-from database import register_user_to_db, login_user, load_users_from_db, load_user_from_db,save_picture_to_database, show_picture_from_db, save_default_picture_to_database
+from database import register_user_to_db, login_user, load_users_from_db, load_user_from_db,save_picture_to_database, show_picture_from_db, save_default_picture_to_database, edit_user_info
 from werkzeug.utils import secure_filename
 from base64 import b64encode
 import os, io
@@ -86,6 +86,24 @@ def edit_profile_picture(username):
     return redirect(f'/profile/{username}')
   return render_template('edit_profile.html')
 
+@app.route('/profile/<username>/edit_profile_info', methods=['GET', 'POST'])
+def edit_profile_info(username):
+  user = load_user_from_db(username)
+  image = show_picture_from_db(username)
+  try:
+    image_data = b64encode(image.profile_picture).decode("utf-8")
+    return render_template('edit_profile_info.html', user=user, image_data=image_data, image=image)
+  except TypeError:
+    return render_template('error.html')
+  return render_template('edit_profile_info.html')
+
+@app.route('/profile/<username>/edit_profile_info_sent', methods=['GET', 'POST'])
+def edit_profile_info_sent(username):
+  if request.method == 'POST':
+    data = request.form
+    edit_user_info(data, username)
+    return redirect(f'/profile/{username}')
+  return render_template('error.html')
 
 def process_picture_default_picture():
   image_path = 'static/default_profile_picture.jpg'
