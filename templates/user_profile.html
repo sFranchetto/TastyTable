@@ -31,7 +31,11 @@
                 </button>
               {% endif %}
               <h5>{{user[0]['username']}}</h5>
-              <p>{{user[0]['country']}}</p>
+              {% if user[0]['country'] %}
+                <p>{{user[0]['country']}}</p>
+              {% else %}
+                <p> </p>
+              {%endif%}
             </div>
           </div>
           <div class="p-4 text-black" style="background-color: #f8f9fa;">
