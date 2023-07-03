@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for, send_file
-from database import register_user_to_db, login_user, load_users_from_db, load_user_from_db,save_picture_to_database, show_picture_from_db, save_default_picture_to_database, edit_user_info
+from database import register_user_to_db, login_user, load_users_from_db, load_user_from_db,save_picture_to_database, show_picture_from_db, save_default_picture_to_database, edit_user_info, create_recipe, get_user_id
 from werkzeug.utils import secure_filename
 from base64 import b64encode
 import os, io
@@ -62,6 +62,10 @@ def logout():
 ############### LOGIN / REGISTRATION / SESSION ###############
 ##############################################################
 
+##############################################################
+#####################   PROFILE   ############################
+##############################################################
+
 @app.route('/profile/<username>')
 def user_profile(username):
     user = load_user_from_db(username)
@@ -104,6 +108,52 @@ def edit_profile_info_sent(username):
     edit_user_info(data, username)
     return redirect(f'/profile/{username}')
   return render_template('error.html')
+
+######################   END    ##############################
+#####################   PROFILE   ############################
+##############################################################
+
+
+
+
+
+
+
+
+
+@app.route('/explore')
+def explore():
+  return render_template('explore.html')
+
+
+@app.route('/recipe/create',  methods=['GET', 'POST'])
+def recipe_create():
+  if request.method == 'POST':
+    username = session['username']
+    data = request.form
+    user_id = get_user_id(username)
+    create_recipe(data, user_id[0]['id'])
+  return render_template('create_recipe.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def process_picture_default_picture():
   image_path = 'static/default_profile_picture.jpg'

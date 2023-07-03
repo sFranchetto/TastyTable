@@ -100,3 +100,31 @@ def edit_user_info(data, username):
                    about = data['about'],
                    level = data['level'],
                    username = username))
+
+def create_recipe(data, user_id):
+  with engine.connect() as conn:
+    conn.execute(text("INSERT INTO recipes (recipe_name, difficulty, main_ingredient, steps, cook_time, user_id, description_recipe, category, ingredient_list) VALUES (:recipe_name, :difficulty, :main_ingredient, :steps, :cook_time, :user_id, :description_recipe, :category, :ingredient_list)").
+                params(
+                  recipe_name = data['recipe_name'],
+                  difficulty = data['difficulty'],
+                  main_ingredient = ['main_ingredient'],
+                  steps = data['steps'],
+                  cook_time = data['cook_time'],
+                  user_id = user_id,
+                  description_recipe = ['description_recipe'],
+                  category = data['category'],
+                  ingredient_list = data['ingredient_list']
+                ))
+
+def get_user_id(username):
+  with engine.connect() as conn:
+      result = conn.execute(
+        text("select id from users WHERE username = :username")
+        .params(username=username))
+      user = []
+      for row in result.all():
+        user.append(row._asdict())
+      if len(user) == 0:
+        return None
+      else:
+        return user

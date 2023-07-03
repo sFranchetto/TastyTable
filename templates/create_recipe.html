@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include 'bootstrap.html' %}
+  <style>
+    
+.avatar{
+width:200px;
+height:200px;
+}				
+  </style>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    {% include 'background.html' %}
+<div class="container bootstrap snippets bootdey">
+    <h1 class="text-secondary">Recipe Info</h1>
+      <hr>
+	<div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img  alt="avatar">
+          <h6>This is your current photo...</h6>
+          
+          <a href="https://tastytable.sfranchetto.repl.co/profile/{{session['username']}}/edit_profile"> Click here to change it</a>
+        </div>
+      </div>
+      
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <!--
+        <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a> 
+          <i class="fa fa-coffee"></i>
+           This is an <strong>.alert</strong>. Use this to show important messages to the 
+        </div> -->
+        <h3>Recipe Info</h3>
+        
+        <form class="form-horizontal" method="POST" action="/recipe/create">
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Recipe Name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="/" name="recipe_name">
+            </div>
+          </div>
+          <div class="form-group col-lg-4">
+            <label class="col-lg-5 control-label">Difficulty level:</label>
+            <select name="difficulty" class="form-select">
+              <option selected disabled>Select</option>
+              <option value="Home cook">Beginner</option>
+              <option value="Beginner">Easy</option>
+              <option value="Intermediate">Medium</option>
+              <option value="Master">Hard</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Main Ingredient:</label>
+            <div class="col-lg-5">
+              <input class="form-control" type="text" value="/" name="main_ingredient">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label mt-2">Description:</label>
+            <div class="form-floating mb-2">
+                <textarea rows="4" cols="50" value="/" name="description_recipe">Describe the dish...
+                </textarea>
+              </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Ingredient List:</label>
+            <div class="form-floating mb-2">
+                <textarea rows="8" cols="40" value="/" name="ingredient_list">Write ingredients here
+                </textarea>
+              </div>
+            
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Procedure:</label>
+            <div class="form-floating mb-2">
+                <textarea rows="9" cols="60" value="/" name="steps">
+                </textarea>
+              </div>
+          </div>
+          <div class="form-group col-lg-4">
+            <label class="col-lg-5 control-label">Category:</label>
+            <select name="category" class="form-select">
+              <option selected disabled>Select</option>
+              <option value="Home cook">Breakfast</option>
+              <option value="Beginner">Main</option>
+              <option value="Intermediate">Comfort</option>
+              <option value="Master">Healthy</option>
+              <option value="Master">Vegetarian/Vegan</option>
+              <option value="Professional">Desert</option>
+            </select>
+          </div>
+          <div class="form-group col-lg-4">
+            <label class="col-lg-5 control-label">Cook time:</label>
+            <select name="cook_time" class="form-select">
+              <option selected disabled>Select</option>
+              <option value="Home cook">Quick - 5m</option>
+              <option value="Beginner">Fast - 10-15m</option>
+              <option value="Intermediate">Medium - 15-30m</option>
+              <option value="Master">Long - 30-45m</option>
+              <option value="Master">Very Long - 45m+</option>
+            </select>
+          </div>
+          <input class="mt-2" type="submit"></input>
+        </form>
+        <br/>
+        <a href="/explore">Cancel </a>
+      </div>
+  </div>
+</div>
+<hr>
+</body>
+</html>
